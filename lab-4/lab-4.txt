@@ -1,0 +1,24 @@
+
+1*
+touch /usr/local/bin/bg-script.sh
+nano bg-script.sh
+./bg-script.sh
+
+
+2**
+chmod 775 /usr/local/bin/bg-script.sh
+
+
+3***
+cd /etc/systemd/system
+touch myservice.service
+nano myservice.service
+sudo systemctl daemon-reload
+sudo systemctl start myservice.service
+sudo systemctl status myservice.service
+sudo systemctl stop myservice.service
+
+4****
+sudo crontab -e
+systemctl status cron 
+ls /tmp
