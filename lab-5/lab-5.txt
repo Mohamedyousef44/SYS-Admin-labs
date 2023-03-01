@@ -1,0 +1,32 @@
+
+1*
+dd if=/dev/zero of=/tmp/disk.img
+
+2**
+sudo losetup -f
+sudo losetup /dev/loop24  /tmp/disk.img
+
+3***
+sudo fdisk /dev/loop24
+
+4****
+sudo mkfs.ext4 /tmp/disk.img
+
+5*****
+sudo mount  /dev/loop24  /mnt
+
+6******
+sudo touch file1.txt
+ls
+ls -i file.txt
+
+7*******
+sudo umount  /mnt
+
+8********
+apt -cache search gparted
+sudo apt  -get  install  gparted
+
+9*********
+sudo gparted
+sudo gparted /dev/loop24
