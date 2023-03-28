@@ -1,0 +1,41 @@
+
+**LVM**
+
+sudo apt install lvm2
+losetup -f
+
+dd if=/dev/zero of=disk1.disk bs=1024 count=100000
+sudo losetup /dev/loop25 disk1.disk
+
+dd if=/dev/zero of=disk2.disk bs=1024 count=100000
+sudo losetup /dev/loop26 disk2.disk
+
+dd if=/dev/zero of=disk3.disk bs=1024 count=100000
+sudo losetup /dev/loop27 disk3.disk
+
+dd if=/dev/zero of=disk4.disk bs=1024 count=100000
+sudo losetup /dev/loop28 disk4.disk
+
+sudo pvcreate /dev/loop25 /dev/loop26 /dev/loop27
+sudo pvscan
+
+sudo lvcreate -L 250 -n LV VG
+sudo lvdisplay
+sudo mkfs.ext4 /dev/VG/LV
+sudo mount /dev/VG/LV /mnt
+
+sudo vgextend VG /dev/loop28
+sudo lvextend -L +50 /dev/VG/LV
+
+sudo umount /dev/VG/LV
+sudo e2fsck -f /dev/VG/LV
+sudo resize2fs /dev/VG/LV 50M
+
+***network***
+
+netstat -atp
+
+ip addr
+
+sudo apt install nmap
+nmap localhost
