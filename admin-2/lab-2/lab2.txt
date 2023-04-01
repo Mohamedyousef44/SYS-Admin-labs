@@ -1,0 +1,13 @@
+lsusb
+
+cat /proc/cpuinfo
+
+iostat 2 5
+
+nicstat
+
+lspci -vmm
+
+ls | grep "*\.zip"
+
+sudo grep "0x[0-9A-Z]" /var/log/syslog
