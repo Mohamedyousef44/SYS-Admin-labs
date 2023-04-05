@@ -1,0 +1,35 @@
+**iptables**
+
+sudo apt install ftpd
+sudo iptables -I INPUT -p tcp --dport 20 -j ACCEPT
+sudo iptables -I INPUT -p tcp --dport 21 -j ACCEPT
+sudo iptables -L -n
+
+**ftp**
+
+sudo apt vsftps
+service vsftpd start
+sudo nano  /etc/vsftpd.conf
+ftp 127.0.0.1
+ls
+
+**firwall**
+sudo ufw enable
+sudo ufw deny 20/tcp
+sudo ufw deny 21/tcp
+sudo iptables -L -n
+sudo ufw status verbose
+
+
+**nfs**
+
+sudo apt install nfs-kernel-server
+sudo ufw allow nfs
+sudo ufw status
+sudo systemctl start nfs-kernel-server
+mkdir /tmp/nfs-shares
+sudo nano /etc/exports
+sudo exportfs -a
+sudo mount -t nfs localhost:/tmp/nfs-shares /mnt
+sudo iptables -L -n >> /tmp/iptabls-backup
+
