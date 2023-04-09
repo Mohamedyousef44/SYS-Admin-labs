@@ -1,0 +1,62 @@
+**install apache2**
+
+sudo apt install apache2
+sudo systemctl start apache2
+
+**Replace the default index.html**
+
+cd /var/www/html
+sudo nano main.html
+sudo mv main.html index.html
+sudo systemctl restart apache2
+
+**install php module**
+
+sudo apt install libapache2-mod-php
+
+**create new Named VirtulHost to serve**
+
+sudo mkdir /var/www/html/sys-admin
+sudo nano /var/www/html/sys-admin/index.php
+sudo nano /etc/apache2/sites-available/sys-admin.conf
+
+Configuration:
+<VirtualHost 127.0.0.21:80>
+    ServerName sysadmin.com
+    DocumentRoot /var/www/html/sys-admin
+
+    ErrorLog /var/log/apache2/sys-admin-error.log
+    CustomLog /var/log/apache2/sys-admin-access.log combined
+
+    <Directory /var/www/html/sys-admin>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+
+systemctl reload apache2
+sudo a2ensite myproject.conf
+
+
+
+**disable directory listing **
+
+sudo nano /etc/apache2/sites-available/sys-admin.conf
+
+<VirtualHost 127.0.0.21:80>
+    ServerName sysadmin.com
+    DocumentRoot /var/www/html/sys-admin
+
+    ErrorLog /var/log/apache2/sys-admin-error.log
+    CustomLog /var/log/apache2/sys-admin-access.log combined
+
+    <Directory /var/www/html/myproject>
+        Options -Indexes
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+
+
